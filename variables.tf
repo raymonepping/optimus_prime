@@ -31,3 +31,13 @@ variable "architecture" {
   type        = string
   default     = "x86_64"
 }
+
+variable "project_name" {
+  description = "Project name for tagging and naming resources"
+  type        = string
+}
+
+variable "environment" {
+  description = "Environment name (e.g., dev, prod, staging)"
+  type        = string
+}
