@@ -8,7 +8,7 @@ variable "environment" {
   type        = string
 }
 
-variable "ipam_cidr" {
+variable "ipam_pool_cidr" {
   description = "CIDR block for the main IPAM pool"
   type        = string
   default     = "10.100.0.0/16"
