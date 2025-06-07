@@ -1,7 +1,7 @@
 locals {
   os_filters = {
     ubuntu = {
-      name   = "ubuntu/images/hvm-ssd/ubuntu-*-24.04-amd64-server-*"
+      name   = "ubuntu/images/hvm-ssd/ubuntu-noble-24.04-amd64-server-*"
       owners = ["099720109477"]
     }
     redhat = {
