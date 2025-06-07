@@ -1,7 +1,8 @@
 module "ami_lookup" {
-  source       = "./modules/ami_lookup"
-  os_type      = var.os_type         # Can be set as workspace variable!
-  architecture = var.architecture    # Optional—uses default "x86_64" if unset
+  source          = "./modules/ami_lookup"
+  os_type         = "ubuntu"
+  architecture    = "x86_64"
+  ami_id_override = "ami-05d3e0186c058c4dd"
 }
 
 output "ami_id" {

@@ -16,6 +16,7 @@ locals {
 }
 
 data "aws_ami" "latest" {
+  count      = var.ami_id_override == "" ? 1 : 0
   most_recent = true
   owners      = local.os_filters[var.os_type].owners
 

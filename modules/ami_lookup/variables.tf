@@ -8,3 +8,9 @@ variable "architecture" {
   type        = string
   default     = "x86_64"
 }
+
+variable "ami_id_override" {
+  description = "Optionally specify an explicit AMI ID to use instead of doing a lookup"
+  type        = string
+  default     = ""
+}
