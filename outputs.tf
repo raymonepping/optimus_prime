@@ -1,9 +1,9 @@
-output "instance_ids" {
-  description = "List of instance IDs"
-  value       = module.compute.instance_ids
+output "aws_region" {
+  description = "The AWS region used for deployment"
+  value       = var.region
 }
 
-output "public_ips" {
-  description = "List of public IPs"
-  value       = module.compute.public_ips
+output "aws_account_id" {
+  description = "AWS Account ID being used"
+  value       = data.aws_caller_identity.current.account_id
 }
