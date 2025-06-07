@@ -27,6 +27,19 @@ module "ipam" {
   tags         = local.common_tags
 }
 
+module "transit_gateway" {
+  source             = "./modules/transit_gateway"
+  project_name       = var.project_name
+  environment        = var.environment
+  tgw_asn            = var.tgw_asn
+  vpc_id             = module.vpc.vpc_id
+  subnet_ids         = module.vpc.public_subnet_ids # or private_subnet_ids as needed
+  enable_dns_support = var.enable_dns_support
+  enable_multicast   = var.enable_multicast
+  tgw_routes         = var.tgw_routes
+  tags               = local.common_tags
+}
+
 module "ami_lookup" {
   source          = "./modules/ami_lookup"
   os_type         = "ubuntu"
@@ -37,7 +50,8 @@ module "ami_lookup" {
 module "compute" {
   source      = "./modules/compute"
   ami_id      = module.ami_lookup.ami_id
+  subnet_id   = module.vpc.public_subnet_ids[0]   # <-- pick public or private as needed
+  vpc_id      = module.vpc.vpc_id
   name        = "${var.project_name}-${var.environment}-web"
   common_tags = local.common_tags
-
 }

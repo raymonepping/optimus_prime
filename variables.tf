@@ -140,3 +140,24 @@ variable "ipam_pool_cidr" {
   type        = string
   default     = "10.0.0.0/8"
 }
+
+variable "tgw_asn" {
+  description = "BGP ASN for Transit Gateway"
+  type        = number
+  default     = 64512
+}
+
+variable "enable_multicast" {
+  description = "Enable multicast support"
+  type        = bool
+  default     = false
+}
+
+variable "tgw_routes" {
+  description = "List of routes for Transit Gateway"
+  type = list(object({
+    destination_cidr = string
+    attachment_id    = string
+  }))
+  default = []
+}

@@ -18,3 +18,13 @@ variable "name" {
   description = "Name tag for the instance"
   type        = string
 }
+
+variable "subnet_id" {
+  description = "The subnet in which to launch the instance"
+  type        = string
+}
+
+variable "vpc_id" {
+  description = "VPC ID (used for security group rules, etc.)"
+  type        = string
+}

@@ -82,3 +82,16 @@ output "vpc_ipam_pool_id" {
 output "vpc_ipam_pool_cidr" {
   value = module.ipam.vpc_ipam_pool_cidr
 }
+
+output "tgw_id" {
+  value = module.transit_gateway.tgw_id
+}
+output "tgw_arn" {
+  value = module.transit_gateway.tgw_arn
+}
+output "tgw_route_table_id" {
+  value = module.transit_gateway.tgw_route_table_id
+}
+output "tgw_attachment_id" {
+  value = module.transit_gateway.tgw_attachment_id
+}
