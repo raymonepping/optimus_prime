@@ -5,6 +5,10 @@ module "ami_lookup" {
   ami_id_override = "ami-05d3e0186c058c4dd"
 }
 
-output "ami_id" {
-  value = module.ami_lookup.ami_id
+module "compute" {
+  source      = "./modules/compute"
+  ami_id      = module.ami_lookup.ami_id
+  name        = "${var.project_name}-${var.environment}-web"
+  common_tags = local.common_tags
+
 }
