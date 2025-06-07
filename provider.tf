@@ -1,8 +1,5 @@
 provider "aws" {
-  region     = var.region
-  access_key = data.vault_kv_secret_v2.aws_creds.data["AWS_ACCESS_KEY_ID"]
-  secret_key = data.vault_kv_secret_v2.aws_creds.data["AWS_SECRET_ACCESS_KEY"]
-  token      = lookup(data.vault_kv_secret_v2.aws_creds.data, "AWS_SESSION_TOKEN", null)
+  region = var.region
 }
 
 provider "vault" {
