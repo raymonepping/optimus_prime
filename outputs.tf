@@ -62,3 +62,23 @@ output "vpc_main_route_table_id" {
 output "vpc_default_security_group_id" {
   value = module.vpc.vpc_default_security_group_id
 }
+
+output "ipam_id" {
+  value = module.ipam.ipam_id
+}
+
+output "main_pool_id" {
+  value = module.ipam.main_pool_id
+}
+
+output "main_pool_cidr" {
+  value = module.ipam.main_pool_cidr
+}
+
+output "vpc_ipam_pool_id" {
+  value = module.ipam.vpc_ipam_pool_id
+}
+
+output "vpc_ipam_pool_cidr" {
+  value = module.ipam.vpc_ipam_pool_cidr
+}

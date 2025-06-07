@@ -19,6 +19,14 @@ module "vpc" {
   tags                   = local.common_tags
 }
 
+module "ipam" {
+  source        = "./modules/ipam"
+  project_name  = var.project_name
+  environment   = var.environment
+  ipam_pool_cidr = var.ipam_pool_cidr    # or set directly if you want
+  tags         = local.common_tags
+}
+
 module "ami_lookup" {
   source          = "./modules/ami_lookup"
   os_type         = "ubuntu"
