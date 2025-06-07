@@ -19,3 +19,15 @@ variable "vault_namespace" {
   type        = string
   default     = "admin"
 }
+
+variable "os_type" {
+  description = "The operating system to use (ubuntu, redhat, suse)"
+  type        = string
+  default     = "ubuntu"
+}
+
+variable "architecture" {
+  description = "The CPU architecture (x86_64 or arm64)"
+  type        = string
+  default     = "x86_64"
+}
