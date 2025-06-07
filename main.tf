@@ -1,3 +1,12 @@
+
+module "ipam" {
+  source        = "./modules/ipam"
+  project_name  = var.project_name
+  environment   = var.environment
+  ipam_pool_cidr = var.ipam_pool_cidr    # or set directly if you want
+  tags         = local.common_tags
+}
+
 module "vpc" {
   source                 = "./modules/vpc"
   project_name           = var.project_name
@@ -17,15 +26,11 @@ module "vpc" {
   flow_log_destination   = var.flow_log_destination
   flow_log_traffic_type  = var.flow_log_traffic_type
   tags                   = local.common_tags
+
+  depends_on = [module.ipam]  
 }
 
-module "ipam" {
-  source        = "./modules/ipam"
-  project_name  = var.project_name
-  environment   = var.environment
-  ipam_pool_cidr = var.ipam_pool_cidr    # or set directly if you want
-  tags         = local.common_tags
-}
+
 
 module "transit_gateway" {
   source             = "./modules/transit_gateway"
@@ -38,6 +43,8 @@ module "transit_gateway" {
   enable_multicast   = var.enable_multicast
   tgw_routes         = var.tgw_routes
   tags               = local.common_tags
+
+  depends_on = [module.vpc]  
 }
 
 module "ami_lookup" {
@@ -54,4 +61,6 @@ module "compute" {
   vpc_id      = module.vpc.vpc_id
   name        = "${var.project_name}-${var.environment}-web"
   common_tags = local.common_tags
+
+  depends_on = [module.vpc]
 }
