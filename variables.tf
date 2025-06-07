@@ -134,3 +134,9 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "ipam_pool_cidr" {
+  description = "CIDR block for the main IPAM pool"
+  type        = string
+  default     = "10.0.0.0/8"
+}
