@@ -89,7 +89,7 @@ resource "aws_route_table_association" "subnet" {
 
 resource "aws_flow_log" "vpc" {
   count           = var.enable_flow_logs ? 1 : 0
-  iam_role_arn    = var.flow_log_iam_role_arn
+  iam_role_arn    = var.flow_log_iam_role_arn != null ? var.flow_log_iam_role_arn : module.iam_roles.vpc_flow_logs_role_arn
   log_destination = var.flow_log_destination
   traffic_type    = var.flow_log_traffic_type
   vpc_id          = aws_vpc.main.id

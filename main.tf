@@ -7,6 +7,13 @@ module "ipam" {
   tags         = local.common_tags
 }
 
+module "iam_roles" {
+  source       = "./modules/iam_roles"
+  project_name = var.project_name
+  environment  = var.environment
+  tags         = local.common_tags
+}
+
 module "vpc" {
   source                 = "./modules/vpc"
   project_name           = var.project_name
@@ -22,7 +29,7 @@ module "vpc" {
   vlan_tags              = var.vlan_tags
   subnet_newbits         = var.subnet_newbits
   enable_flow_logs       = var.enable_flow_logs
-  flow_log_iam_role_arn  = var.flow_log_iam_role_arn
+  flow_log_iam_role_arn  = module.iam_roles.vpc_flow_logs_role_arn
   flow_log_destination   = var.flow_log_destination
   flow_log_traffic_type  = var.flow_log_traffic_type
   tags                   = local.common_tags
