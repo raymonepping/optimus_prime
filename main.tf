@@ -14,6 +14,14 @@ module "iam_roles" {
   tags         = local.common_tags
 }
 
+module "monitoring" {
+  source         = "./modules/monitoring"
+  project_name   = var.project_name
+  environment    = var.environment
+  tags           = local.common_tags
+  log_retention_days = 14
+}
+
 module "vpc" {
   source                 = "./modules/vpc"
   project_name           = var.project_name
@@ -29,10 +37,11 @@ module "vpc" {
   vlan_tags              = var.vlan_tags
   subnet_newbits         = var.subnet_newbits
   enable_flow_logs       = var.enable_flow_logs
-  flow_log_iam_role_arn  = module.iam_roles.vpc_flow_logs_role_arn
-  flow_log_destination   = var.flow_log_destination
-  flow_log_traffic_type  = var.flow_log_traffic_type
-  tags                   = local.common_tags
+  flow_log_iam_role_arn   = module.monitoring.vpc_flow_logs_role_arn
+  flow_log_log_group_name = module.monitoring.vpc_flow_logs_log_group_name
+  flow_log_destination    = null         # Not used when log group name is provided
+  flow_log_traffic_type   = var.flow_log_traffic_type
+  tags                    = local.common_tags
 
   depends_on = [module.ipam]  
 }
