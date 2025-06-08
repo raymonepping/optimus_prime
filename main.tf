@@ -3,7 +3,7 @@ module "ipam" {
   source        = "./modules/ipam"
   project_name  = var.project_name
   environment   = var.environment
-  ipam_pool_cidr = var.ipam_pool_cidr    # or set directly if you want
+  ipam_pool_cidr = var.ipam_pool_cidr    
   tags         = local.common_tags
 }
 
@@ -12,7 +12,7 @@ module "vpc" {
   project_name           = var.project_name
   environment            = var.environment
   use_ipam               = var.use_ipam
-  ipam_pool_id           = var.ipam_pool_id
+  ipam_pool_id           = module.ipam.vpc_ipam_pool_id
   vpc_netmask_length     = var.vpc_netmask_length
   vpc_cidr               = var.vpc_cidr
   enable_dns_hostnames   = var.enable_dns_hostnames
@@ -30,15 +30,13 @@ module "vpc" {
   depends_on = [module.ipam]  
 }
 
-
-
 module "transit_gateway" {
   source             = "./modules/transit_gateway"
   project_name       = var.project_name
   environment        = var.environment
   tgw_asn            = var.tgw_asn
   vpc_id             = module.vpc.vpc_id
-  subnet_ids         = module.vpc.public_subnet_ids # or private_subnet_ids as needed
+  subnet_ids         = module.vpc.public_subnet_ids 
   enable_dns_support = var.enable_dns_support
   enable_multicast   = var.enable_multicast
   tgw_routes         = var.tgw_routes
@@ -57,7 +55,7 @@ module "ami_lookup" {
 module "compute" {
   source      = "./modules/compute"
   ami_id      = module.ami_lookup.ami_id
-  subnet_id   = module.vpc.public_subnet_ids[0]   # <-- pick public or private as needed
+  subnet_id   = module.vpc.public_subnet_ids[0]   
   vpc_id      = module.vpc.vpc_id
   name        = "${var.project_name}-${var.environment}-web"
   common_tags = local.common_tags
