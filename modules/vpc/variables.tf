@@ -100,6 +100,12 @@ variable "flow_log_traffic_type" {
   }
 }
 
+variable "flow_log_log_group_name" {
+  description = "Name of the CloudWatch Log Group for VPC Flow Logs"
+  type        = string
+  default     = null
+}
+
 variable "tags" {
   description = "A map of tags to assign to the resources"
   type        = map(string)
