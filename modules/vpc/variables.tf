@@ -90,6 +90,12 @@ variable "flow_log_destination" {
   default     = null
 }
 
+variable "flow_log_log_group_arn" {
+  description = "ARN of the CloudWatch Log Group for VPC Flow Logs"
+  type        = string
+  default     = null
+}
+
 variable "flow_log_traffic_type" {
   description = "Traffic type for VPC Flow Logs (ALL, ACCEPT, REJECT)"
   type        = string

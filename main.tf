@@ -39,6 +39,7 @@ module "vpc" {
   enable_flow_logs       = var.enable_flow_logs
   flow_log_iam_role_arn   = module.monitoring.vpc_flow_logs_role_arn
   flow_log_log_group_name = module.monitoring.vpc_flow_logs_log_group_name
+  flow_log_log_group_arn  = module.monitoring.vpc_flow_logs_log_group_arn
   flow_log_destination    = null         
   flow_log_traffic_type   = var.flow_log_traffic_type
   tags                    = local.common_tags

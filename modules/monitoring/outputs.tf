@@ -4,8 +4,8 @@ output "vpc_flow_logs_log_group_name" {
 }
 
 output "vpc_flow_logs_log_group_arn" {
-  description = "CloudWatch Log Group ARN for VPC Flow Logs"
   value       = aws_cloudwatch_log_group.vpc_flow_logs.arn
+  description = "ARN of the VPC Flow Logs CloudWatch Log Group"
 }
 
 output "vpc_flow_logs_role_arn" {

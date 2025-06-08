@@ -88,12 +88,12 @@ resource "aws_route_table_association" "subnet" {
 }
 
 resource "aws_flow_log" "vpc" {
-  count = var.enable_flow_logs ? 1 : 0
-
-  iam_role_arn    = var.flow_log_iam_role_arn
-  log_group_name  = var.flow_log_log_group_name
-  vpc_id          = aws_vpc.main.id
-  traffic_type    = var.flow_log_traffic_type
+  count                = var.enable_flow_logs ? 1 : 0
+  vpc_id               = aws_vpc.main.id
+  iam_role_arn         = var.flow_log_iam_role_arn
+  log_destination      = var.flow_log_log_group_arn
+  log_destination_type = "cloud-watch-logs"
+  traffic_type         = var.flow_log_traffic_type
 
   tags = merge(
     var.tags,
