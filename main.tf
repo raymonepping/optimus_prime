@@ -68,12 +68,23 @@ module "ami_lookup" {
 }
 
 module "compute" {
-  source      = "./modules/compute"
-  ami_id      = module.ami_lookup.ami_id
-  subnet_id   = module.vpc.public_subnet_ids[0]   
-  vpc_id      = module.vpc.vpc_id
-  name        = "${var.project_name}-${var.environment}-web"
-  common_tags = local.common_tags
+  source   = "./modules/compute"
+  project_name       = var.project_name
+  environment        = var.environment
+  ami_id             = module.ami_lookup.ami_id
+  key_name           = "demo-keypair-name" # 
+
+  instances = [
+    {
+      name                = "${var.project_name}-${var.environment}-web"
+      instance_type       = "t3.micro"
+      subnet_id           = module.vpc.public_subnet_ids[0]
+      security_group_ids  = [module.vpc.public_sg_id] 
+      iam_role_name       = module.iam_roles.instance_role_name 
+      user_data_file      = null 
+      tags                = local.common_tags
+    }
+  ]
 
   depends_on = [module.vpc]
 }
