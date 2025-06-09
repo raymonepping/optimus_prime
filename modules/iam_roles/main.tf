@@ -16,6 +16,27 @@ resource "aws_iam_role" "vpc_flow_logs" {
   })
 }
 
+resource "aws_iam_role" "instance" {
+  name = "${var.project_name}-${var.environment}-instance-role"
+  assume_role_policy = data.aws_iam_policy_document.ec2_assume_role_policy.json
+
+  tags = merge(var.tags, {
+    Name = "${var.project_name}-${var.environment}-instance-role"
+    Type = "ec2-instance"
+  })
+}
+
+data "aws_iam_policy_document" "ec2_assume_role_policy" {
+  statement {
+    effect = "Allow"
+    principals {
+      type        = "Service"
+      identifiers = ["ec2.amazonaws.com"]
+    }
+    actions = ["sts:AssumeRole"]
+  }
+}
+
 resource "aws_iam_role_policy" "vpc_flow_logs_policy" {
   role = aws_iam_role.vpc_flow_logs.id
   policy = jsonencode({
