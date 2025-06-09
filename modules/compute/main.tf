@@ -158,7 +158,7 @@ resource "aws_cloudwatch_metric_alarm" "status_check_failed" {
   alarm_name          = "${var.instances[count.index].name}-status-check-failed"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "2"
-  metric_name         = "StatusCheckFailed"
+  metric_name         = "StatusCheckFailed_System"
   namespace           = "AWS/EC2"
   period              = "60"
   statistic           = "Average"
