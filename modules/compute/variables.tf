@@ -107,3 +107,17 @@ variable "kms_key_id" {
   type        = string
   default     = null
 }
+
+variable "instances" {
+  description = "List of instance configurations"
+  type = list(object({
+    name                    = string
+    instance_type           = string
+    subnet_id               = string
+    security_group_ids      = list(string)
+    iam_role_name           = string
+    iam_instance_profile    = string    
+    user_data_file          = string
+    tags                    = map(string)
+  }))
+}

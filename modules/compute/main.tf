@@ -7,7 +7,8 @@ resource "aws_instance" "main" {
   subnet_id              = var.instances[count.index].subnet_id
   vpc_security_group_ids = var.instances[count.index].security_group_ids
   key_name               = var.key_name
-  iam_instance_profile = var.create_instance_profiles ? aws_iam_instance_profile.main[count.index].name : var.instances[count.index].iam_role_name
+  iam_instance_profile   = var.instances[count.index].iam_instance_profile
+
 
   # User data script
   user_data = var.instances[count.index].user_data_file != null ? file("${path.module}/${var.instances[count.index].user_data_file}") : null
@@ -173,16 +174,6 @@ resource "aws_cloudwatch_metric_alarm" "status_check_failed" {
     var.alarm_actions,
     ["arn:aws:automate:${data.aws_region.current.name}:ec2:recover"]  # Auto-recover instance
   )
-
-  tags = var.instances[count.index].tags
-}
-
-# Instance profile association (if separate from instance creation)
-resource "aws_iam_instance_profile" "main" {
-  count = var.create_instance_profiles ? length(var.instances) : 0
-
-  name = "${var.instances[count.index].name}-profile"
-  role = var.instances[count.index].iam_role_name
 
   tags = var.instances[count.index].tags
 }
