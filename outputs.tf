@@ -95,3 +95,13 @@ output "tgw_route_table_id" {
 output "tgw_attachment_id" {
   value = module.transit_gateway.tgw_attachment_id
 }
+
+output "instance_ids" {
+  value       = module.compute.instance_ids
+  description = "List of IDs of all EC2 instances created by the compute module"
+}
+
+output "instance_public_ips" {
+  value       = module.compute.public_ips
+  description = "List of public IPs of all EC2 instances created by the compute module"
+}
