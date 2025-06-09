@@ -98,7 +98,7 @@ output "tgw_attachment_id" {
 
 output "instance_ids" {
   value       = module.compute.instance_ids
-  description = "List of IDs of all EC2 instance created by the compute module"
+  description = "List of IDs of all EC2 instances created by the compute module"
 }
 
 output "instance_public_ips" {
