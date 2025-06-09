@@ -72,7 +72,7 @@ module "compute" {
   project_name       = var.project_name
   environment        = var.environment
   ami_id             = module.ami_lookup.ami_id
-  key_name           = "demo-keypair-name" # 
+  key_name           = "netbox-demo" # 
 
   instances = [
     {
