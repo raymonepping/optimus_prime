@@ -63,3 +63,10 @@ output "vpc_default_security_group_id" {
   value       = aws_vpc.main.default_security_group_id
   description = "ID of the default security group"
 }
+
+output "instance_ids" {
+  value = module.compute.instance_ids
+}
+output "instance_public_ips" {
+  value = module.compute.public_ips
+}
