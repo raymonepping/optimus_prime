@@ -1,57 +1,97 @@
-output "region" {
-  description = "AWS region used for deployment"
+output "aws_region" {
+  description = "The AWS region used for deployment"
   value       = var.region
 }
 
-output "vpc_id" {
-  description = "ID of the VPC"
-  value       = module.vpc.vpc_id
-}
-
-output "public_subnet_ids" {
-  description = "List of public subnet IDs"
-  value       = module.vpc.public_subnet_ids
-}
-
-output "private_subnet_ids" {
-  description = "List of private subnet IDs"
-  value       = module.vpc.private_subnet_ids
+output "ami_id" {
+  value = module.ami_lookup.ami_id
 }
 
 output "instance_id" {
-  description = "ID of the deployed EC2 instance"
-  value       = module.compute.instance_id
+  value = module.compute.instance_id
 }
 
 output "instance_public_ip" {
-  description = "Public IP address of the EC2 instance"
-  value       = module.compute.public_ip
+  value = module.compute.public_ip
+}
+
+output "vpc_id" {
+  value = module.vpc.vpc_id
+}
+
+output "vpc_cidr_block" {
+  value = module.vpc.vpc_cidr_block
+}
+
+output "internet_gateway_id" {
+  value = module.vpc.internet_gateway_id
+}
+
+output "subnet_ids" {
+  value = module.vpc.subnet_ids
+}
+
+output "public_subnet_ids" {
+  value = module.vpc.public_subnet_ids
+}
+
+output "private_subnet_ids" {
+  value = module.vpc.private_subnet_ids
+}
+
+output "subnet_cidrs" {
+  value = module.vpc.subnet_cidrs
+}
+
+output "public_route_table_id" {
+  value = module.vpc.public_route_table_id
+}
+
+output "private_route_table_ids" {
+  value = module.vpc.private_route_table_ids
+}
+
+output "availability_zones" {
+  value = module.vpc.availability_zones
+}
+
+output "vpc_main_route_table_id" {
+  value = module.vpc.vpc_main_route_table_id
+}
+
+output "vpc_default_security_group_id" {
+  value = module.vpc.vpc_default_security_group_id
+}
+
+output "ipam_id" {
+  value = module.ipam.ipam_id
+}
+
+output "main_pool_id" {
+  value = module.ipam.main_pool_id
+}
+
+output "main_pool_cidr" {
+  value = module.ipam.main_pool_cidr
+}
+
+output "vpc_ipam_pool_id" {
+  value = module.ipam.vpc_ipam_pool_id
+}
+
+output "vpc_ipam_pool_cidr" {
+  value = module.ipam.vpc_ipam_pool_cidr
 }
 
 output "tgw_id" {
-  description = "ID of the Transit Gateway"
-  value       = module.transit_gateway.tgw_id
+  value = module.transit_gateway.tgw_id
 }
-
-output "ipam_pool_id" {
-  description = "ID of the IPAM pool"
-  value       = module.ipam.vpc_ipam_pool_id
+output "tgw_arn" {
+  value = module.transit_gateway.tgw_arn
 }
-
-output "vpc_flow_logs_log_group_arn" {
-  description = "ARN of the CloudWatch Log Group for VPC Flow Logs"
-  value       = module.monitoring.vpc_flow_logs_log_group_arn
+output "tgw_route_table_id" {
+  value = module.transit_gateway.tgw_route_table_id
 }
-
-output "tags_used" {
-  description = "The effective tags applied to all resources"
-  value = merge(
-    {
-      Project     = var.project.name
-      Environment = var.project.environment
-      Owner       = var.project.owner
-      ManagedBy   = "Terraform"
-    },
-    var.extra_tags
-  )
+output "tgw_attachment_id" {
+  value = module.transit_gateway.tgw_attachment_id
 }
