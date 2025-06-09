@@ -18,8 +18,8 @@ module "monitoring" {
   source           = "./modules/monitoring"
   project_name     = var.project_name
   environment      = var.environment
-  tags             = local.common_tags
   log_retention_days = 14
+  tags             = local.common_tags
 }
 
 module "vpc" {
