@@ -7,3 +7,8 @@ output "instance_role_name" {
   description = "Name of the instance IAM role"
   value       = aws_iam_role.instance.name
 }
+
+output "instance_profile_name" {
+  description = "Name of the instance IAM profile"
+  value       = aws_iam_instance_profile.instance.name
+}

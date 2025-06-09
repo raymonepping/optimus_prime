@@ -26,6 +26,16 @@ resource "aws_iam_role" "instance" {
   })
 }
 
+resource "aws_iam_instance_profile" "instance" {
+  name = "${var.project_name}-${var.environment}-instance-profile"
+  role = aws_iam_role.instance.name
+
+  tags = merge(var.tags, {
+    Name = "${var.project_name}-${var.environment}-instance-profile"
+    Type = "ec2-instance-profile"
+  })
+}
+
 data "aws_iam_policy_document" "ec2_assume_role_policy" {
   statement {
     effect = "Allow"
