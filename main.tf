@@ -79,7 +79,7 @@ module "compute" {
       name                = "${var.project_name}-${var.environment}-web"
       instance_type       = "t3.micro"
       subnet_id           = module.vpc.public_subnet_ids[0]
-      security_group_ids  = [module.vpc.public_sg_id] 
+      security_group_ids  = [module.vpc.vpc_default_security_group_id] 
       iam_role_name       = module.iam_roles.instance_role_name 
       user_data_file      = null 
       tags                = local.common_tags
