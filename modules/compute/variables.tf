@@ -8,19 +8,6 @@ variable "project_name" {
   type        = string
 }
 
-variable "instances" {
-  description = "List of instance configurations"
-  type = list(object({
-    name                = string
-    instance_type       = string
-    subnet_id          = string
-    security_group_ids = list(string)
-    iam_role_name      = string
-    user_data_file     = string
-    tags               = map(string)
-  }))
-}
-
 variable "ami_id" {
   description = "AMI ID for instances"
   type        = string
